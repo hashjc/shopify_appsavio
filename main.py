@@ -6,7 +6,7 @@ app = FastAPI()
 
 MONDAY_API_KEY = os.getenv("MONDAY_API_KEY")
 BOARD_ID = os.getenv("MONDAY_BOARD_ID")
-
+print('Start of main.py')
 @app.post("/shopify-webhook")
 async def shopify_webhook(request: Request):
     data = await request.json()
