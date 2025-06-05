@@ -1,12 +1,16 @@
 from flask import Flask, request, jsonify
 import requests
 import os
-
+import json
 app = Flask(__name__)
 
 MONDAY_API_KEY = os.getenv("MONDAY_API_KEY")
 BOARD_ID = os.getenv("MONDAY_BOARD_ID")
-
+ORDER_BOARD_ID = os.getenv("MONDAY_ORDERS_BOARD_ID")
+headers = {
+    "Authorization": MONDAY_API_KEY,
+    "Content-Type": "application/json"
+}
 print('Start of main.py')
 
 @app.route('/')
@@ -28,33 +32,43 @@ def draft_order_created_in_shopify():
     """
     Order Creation webhook handler
     """
+    order_board_id = ORDER_BOARD_ID
     print("Order Creation Draft post request ", flush=True)
     data = request.get_json()
     print("Order Creation method 2 = ", data, flush=True)
+    order_id = data.get("id", "")
+    order_status = data.get("status", "")
+    order_name = data.get("name", "")
+    email = data.get("email", "")
+    total = data.get("total_price", "")
 
-    order_name = data.get("name")
-    email = data.get("email")
-    total = data.get("total_price")
 
-    query = '''
-    mutation {
-      create_item (
-        board_id: %s,
-        item_name: "Order %s",
-        column_values: "{\"email\" : \"%s\", \"price\" : \"%s\"}"
-      ) {
-        id
-      }
+    # Column Values
+    ITEM_NAME = "New Shopify Order 4"
+    COLUMN_VALUES = {
+        "text_mkrm4aj8": "Test Item Description",
+        "numeric_mkrm4z9t": 100.5,
+        "status": {"index": 1},         # 'index' is the position in the status label list
+        "date4": {"date": "2025-06-05"},  # format: YYYY-MM-DD
     }
-    ''' % (BOARD_ID, order_name, email, total)
+    # Format values into a JSON string and escape it for GraphQL
+    column_values_str = json.dumps(COLUMN_VALUES).replace('"', '\\"')
 
-    headers = {
-        "Authorization": MONDAY_API_KEY,
-        "Content-Type": "application/json"
-    }
-
+    # Create Graph QL
+    query = f'''
+        mutation {{
+            create_item (
+                board_id: "{BOARD_ID}",
+                item_name: "{ITEM_NAME}",
+                column_values: "{column_values_str}"
+            ) {{
+              id
+            }}
+        }}
+    '''
+    # Make an HTTP Request
     response = requests.post("https://api.monday.com/v2", json={"query": query}, headers=headers)
-
+    print('Draft Order method -> Resposen status code ', response.status_code, flush=True)
     return jsonify({"monday_response": response.json()})
 
 if __name__ == '__main__':
