@@ -11,6 +11,7 @@ print('Start of main.py')
 
 @app.route('/')
 def home():
+    print('Home page')
     return "Hello from Render home page!"
 
 @app.route('/order_create', methods=['POST'])
