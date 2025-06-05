@@ -8,7 +8,7 @@ MONDAY_API_KEY = os.getenv("MONDAY_API_KEY")
 BOARD_ID = os.getenv("MONDAY_BOARD_ID")
 ORDER_BOARD_ID = os.getenv("MONDAY_ORDERS_BOARD_ID")
 headers = {
-    "Authorization": MONDAY_API_KEY,
+    "Authorization": "eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjUyMjU5NjU2OSwiYWFpIjoxMSwidWlkIjo3Njc0NjQ1OSwiaWFkIjoiMjAyNS0wNi0wNVQxNTowNzowNC40MDFaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6Mjk2NTAyMjEsInJnbiI6ImFwc2UyIn0.TY4oQYraqw6fuq6I10A5Ga5JMn3LGoZv8qIQawbQlDY",
     "Content-Type": "application/json"
 }
 print('Start of main.py')
