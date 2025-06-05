@@ -2,8 +2,9 @@ services:
   - type: web
     name: shopify-monday-integration
     env: python
-    buildCommand: ""
-    startCommand: uvicorn main:app --host 0.0.0.0 --port 10000
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python main.py"
+
     envVars:
       - key: MONDAY_API_KEY
         value: eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjUyMTk0MDU0MiwiYWFpIjoxMSwidWlkIjo3Njc0NjQ1OSwiaWFkIjoiMjAyNS0wNi0wNFQxMzozODowNC4wNDVaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6Mjk2NTAyMjEsInJnbiI6ImFwc2UyIn0.aL4bmIlAIcT3g_yrB8j_SNIQxGHVxtyJHD2cGFLmxWw
