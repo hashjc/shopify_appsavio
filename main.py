@@ -22,6 +22,15 @@ def shopify_webhook():
     data = request.get_json()
     print("Order Creation method 2 = ", data)
 
+@app.route('/order_create_draft', methods=['POST'])
+def shopify_webhook():
+    """
+    Order Creation webhook handler
+    """
+    print("Order Creation Draft")
+    data = request.get_json()
+    print("Order Creation method 2 = ", data)
+
     order_name = data.get("name")
     email = data.get("email")
     total = data.get("total_price")
