@@ -64,9 +64,7 @@ BOARD_ID = os.getenv("MONDAY_BOARD_ID")
 print('Start of main.py')
 @app.post("/order_create")
 async def shopify_webhook(request: Request):
-    """
-    Order Creation
-    """
+    #Order Creation
     print("Order Creation method")
     data = await request.json()
     print("Order Creation method 2 = ", data)
