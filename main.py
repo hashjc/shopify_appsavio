@@ -28,9 +28,9 @@ def draft_order_created_in_shopify():
     """
     Order Creation webhook handler
     """
-    print("Order Creation Draft post request ")
+    print("Order Creation Draft post request ", flush=True)
     data = request.get_json()
-    print("Order Creation method 2 = ", data)
+    print("Order Creation method 2 = ", data, flush=True)
 
     order_name = data.get("name")
     email = data.get("email")
