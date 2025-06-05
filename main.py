@@ -12,7 +12,9 @@ async def shopify_webhook(request: Request):
     """
     Order Creation
     """
+    print("Order Creation method")
     data = await request.json()
+    print("Order Creation method 2 = ", data)
 
     order_name = data.get("name")
     email = data.get("email")
