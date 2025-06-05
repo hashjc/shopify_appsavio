@@ -69,6 +69,7 @@ def draft_order_created_in_shopify():
     # Make an HTTP Request
     response = requests.post("https://api.monday.com/v2", json={"query": query}, headers=headers)
     print('Draft Order method -> Resposen status code ', response.status_code, flush=True)
+    print('Draft Order method -> Resposen body ', response.json(), flush=True)
     return jsonify({"monday_response": response.json()})
 
 if __name__ == '__main__':
