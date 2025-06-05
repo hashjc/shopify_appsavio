@@ -14,7 +14,7 @@ def home():
     return "Hello from Render home page!"
 
 @app.route('/order_create', methods=['POST'])
-def shopify_webhook():
+def order_created_in_shopify():
     """
     Order Creation webhook handler
     """
@@ -23,7 +23,7 @@ def shopify_webhook():
     print("Order Creation method 2 = ", data)
 
 @app.route('/order_create_draft', methods=['POST'])
-def shopify_webhook():
+def draft_order_created_in_shopify():
     """
     Order Creation webhook handler
     """
@@ -58,5 +58,7 @@ def shopify_webhook():
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 10000))
+    # Single threaded and not secure using app.run() but any ways
+    # It runs Flask's development server, which is fine for local testing but not recommended on Render or any production environment.
     app.run(host='0.0.0.0', port=port)
 
