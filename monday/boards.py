@@ -113,6 +113,8 @@ def find_column_id_from_board_data(board_data, column_title):
             column_info = column
             column_id = column.get("id", None)
             return {"error": "", "success": success, "column_id": column_id, "column_data": column}
+    else:
+        return {"error": f"Column {column_title} did Not match ", "success": False, "column_id": column_id, "column_data": column}
 
 def find_column_id_from_column_title(board_id, column_title):
     """

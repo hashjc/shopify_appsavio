@@ -37,6 +37,9 @@ def create_order(order_board_id, order_name, order_column_values):
         col_title = key
         col_value = order_column_values.get(key)
         col_result = find_column_id_from_board_data(order_metadata, col_title)
+        print('Order.pty Col result ', col_result, flush=True)
+        col_id = column_title_to_column_id_mapping(col_title)
+        print('Create order method = cl id ', col_id)
         print('Create Order method - Col title, value, id ', col_title, ' value = ', col_value, ' col id res = ', col_result, flush=True)
         if(col_result.get("success") == True):
             col_id = col_result.get("column_id")
