@@ -37,7 +37,7 @@ def create_order(order_board_id, order_name, order_column_values):
             col_id = col_result.get("column_id")
             order_column_values[col_id] = col_value
 
-    print("Column Values ", order_column_values, flush=True)
+    print("Create order method: Column Values ", order_column_values, flush=True)
 
     # Create Order Record
     order_creation_result = create_item_record(order_board_id, order_name, order_column_values)
