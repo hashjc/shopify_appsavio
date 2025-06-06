@@ -28,11 +28,13 @@ def create_order(order_board_id, order_name, order_column_values):
         return {"success": success, "error": error}
 
     # Iterate Over Each Column and Create Columns JSON
+    print('Create Order method - Order columsn values input ', order_column_values, flush=True)
     order_column_values = {}
     for key in order_column_values.keys():
         col_title = key
         col_value = order_column_values.get(key)
         col_result = find_column_id_from_board_data(order_metadata, col_title)
+        print('Create Order method - Col title, value, id ', col_title, ' value = ', col_value, ' col id res = ', col_result, flush=True)
         if(col_result.get("success") == True):
             col_id = col_result.get("column_id")
             order_column_values[col_id] = col_value

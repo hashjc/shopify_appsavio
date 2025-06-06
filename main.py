@@ -49,6 +49,7 @@ def order_created_in_shopify():
         "Subtotal Price": order_subtotal_price,
         "Discount": order_discount
     }
+    print("Main py -> order ", order_board_id, ' order name ', ITEM_NAME, ' Col= ', COLUMN_VALUES)
     order_creation_result = create_order(order_board_id, ITEM_NAME, COLUMN_VALUES)
     print('order creation result ', order_creation_result, flush=True)
     # Create Order Line Items as Subitems
