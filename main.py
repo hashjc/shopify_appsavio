@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from orders import create_order
 import requests
 import os
 import json
@@ -25,8 +26,33 @@ def order_created_in_shopify():
     """
     print("Order Creation method ", flush=True)
     data = request.get_json()
+    order_board_id = 2023614902
     print("Order Creation method 2 = ", data, flush=True)
-    return None
+    order_number = data.get("order_number", "")
+    order_id = data.get("id", "")
+    order_confirmed = data.get("confirmed", None) # True or False
+    order_confirmation_number = data.get("confirmation_number", None)
+    order_name = data.get("name", None)
+    order_notes = data.get("note", None)
+    order_total_price = data.get("total_price", None)
+    order_subtotal_price = data.get("subtotal_price", None)
+    order_discount = data.get("total_discounts", None)
+    # Create Order: Step 1 Create All columns
+    ITEM_NAME = order_number
+    COLUMN_VALUES = {
+        "Order Id": order_id,
+        "Order Confirmed": order_confirmed,
+        "Order Confirmation Number": order_confirmation_number,
+        "Name": order_name,
+        "Notes": order_notes,
+        "Total Price": order_total_price,
+        "Subtotal Price": order_subtotal_price,
+        "Discount": order_discount
+    }
+    order_creation_result = create_order(order_board_id, ITEM_NAME, COLUMN_VALUES)
+    print('order creation result ', order_creation_result, flush=True)
+    # Create Order Line Items as Subitems
+    return order_creation_result
 
 @app.route('/order_create_draft', methods=['POST'])
 def draft_order_created_in_shopify():
