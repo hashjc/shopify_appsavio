@@ -30,7 +30,7 @@ def create_order(order_board_id, order_name, order_column_values):
 
     # Iterate Over Each Column and Create Columns JSON
     print('Create Order method - Order columsn values input ', order_column_values, flush=True)
-    order_column_values = {}
+    #order_column_values = {}
     column_title_to_column_id_mapping = get_column_title_to_column_id_mapping(order_board_id)
     print("Order.py Order board col title to id mappings ", column_title_to_column_id_mapping, flush=True)
     for key in order_column_values.keys():
