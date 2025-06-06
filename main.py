@@ -11,7 +11,7 @@ headers = {
     "Authorization": "eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjUyMjU5NjU2OSwiYWFpIjoxMSwidWlkIjo3Njc0NjQ1OSwiaWFkIjoiMjAyNS0wNi0wNVQxNTowNzowNC40MDFaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6Mjk2NTAyMjEsInJnbiI6ImFwc2UyIn0.TY4oQYraqw6fuq6I10A5Ga5JMn3LGoZv8qIQawbQlDY",
     "Content-Type": "application/json"
 }
-print('Start of main.py')
+print('Start of main.py BOARD ID = ', ORDER_BOARD_ID, ', token =  ', MONDAY_API_KEY, flush=True)
 
 @app.route('/')
 def home():
@@ -32,7 +32,7 @@ def draft_order_created_in_shopify():
     """
     Order Creation webhook handler
     """
-    order_board_id = ORDER_BOARD_ID
+    order_board_id = 2023614902
     print("Order Creation Draft post request ", flush=True)
     data = request.get_json()
     print("Order Creation method 2 = ", data, flush=True)
@@ -58,7 +58,7 @@ def draft_order_created_in_shopify():
     query = f'''
         mutation {{
             create_item (
-                board_id: "{BOARD_ID}",
+                board_id: "{order_board_id}",
                 item_name: "{ITEM_NAME}",
                 column_values: "{column_values_str}"
             ) {{
