@@ -5,6 +5,7 @@
 # 4. Get Order: By Order Id
 from monday.boards import get_board_all_columns
 from monday.boards import find_column_id_from_board_data
+from monday.boards import get_column_title_to_column_id_mapping
 from monday.items import create_item_record
 #from monday.items import create_item
 def create_order(order_board_id, order_name, order_column_values):
@@ -30,6 +31,8 @@ def create_order(order_board_id, order_name, order_column_values):
     # Iterate Over Each Column and Create Columns JSON
     print('Create Order method - Order columsn values input ', order_column_values, flush=True)
     order_column_values = {}
+    column_title_to_column_id_mapping = get_column_title_to_column_id_mapping(order_board_id)
+    print("Order.py Order board col title to id mappings ", column_title_to_column_id_mapping, flush=True)
     for key in order_column_values.keys():
         col_title = key
         col_value = order_column_values.get(key)
@@ -39,7 +42,7 @@ def create_order(order_board_id, order_name, order_column_values):
             col_id = col_result.get("column_id")
             order_column_values[col_id] = col_value
 
-    print("Create order method: Column Values ", order_column_values, flush=True)
+    print("Order.py Create order method: Column Values ", order_column_values, flush=True)
 
     # Create Order Record
     order_creation_result = create_item_record(order_board_id, order_name, order_column_values)

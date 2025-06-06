@@ -58,10 +58,44 @@ def get_board_all_columns(board_id):
         'error': error
     }
 
+
+def get_column_title_to_column_id_mapping(board_id):
+    """
+    Input
+        1) Board Id:
+    Output:
+        1) Column Title to Column Id mappings:
+        If a column title is repeated the first occurrence's id is returned
+    """
+    error = ''
+    column_title_to_id_mapping = {}
+    if(board_id is None or len(str(board_id)) == 0):
+        error = 'Board Id is blank'
+        return {"success": False, "error": error}
+    # Get Board Information
+    board_info_result = get_board_all_columns(board_id)
+    if(board_info_result.get("success") == True):
+        result = board_info_result.get("metadata", {})
+        boards = result.get("data", {}).get("boards", [])
+        if (len(boards) == 0):
+            error = "Board not found"
+            return {"success": False, "error": error}
+        # Get Board Columns
+        columns = boards[0].get("columns", [])
+        for column in columns:
+            col_title = column.get("title")
+            col_id = column.get("id")
+            if col_title not in column_title_to_id_mapping:
+                column_title_to_id_mapping[col_title] = col_id
+        return {"success": True, "error": "", "mapping": column_title_to_id_mapping}
+    else:
+        return {"success": False, "error": board_info_result.get("error", "An error finding board")}
+
 def find_column_id_from_board_data(board_data, column_title):
-    """Input:
-    1) Board Data: As it is
-    2) Column Title: To match
+    """
+    Input:
+        1) Board Data: As it is
+        2) Column Title: To match
     """
     success = False
     error = ''
@@ -81,9 +115,10 @@ def find_column_id_from_board_data(board_data, column_title):
             return {"error": "", "success": success, "column_id": column_id, "column_data": column}
 
 def find_column_id_from_column_title(board_id, column_title):
-    """Input:
-    1) Board Id: To return boards's metadata. Ensure You give Single Board Id as integer
-    2) Column Title: To match
+    """
+    Input:
+        1) Board Id: To return boards's metadata. Ensure You give Single Board Id as integer
+        2) Column Title: To match
     """
     success = False
     error = ''

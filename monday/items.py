@@ -13,11 +13,13 @@ MONDAY_API_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjUyMjU5NjU2OSwiYWFpIjoxMSwidWlkI
 def create_item_record(board_id, item_name, column_values):
     """
     Input:
-    1) Board Id - As Integer
-    2) Item Name
-    3) Column Values: Dictionary.
-    Pass column_id: column_value type of key value pairs.
-    Ensure you check date, person and picklist fields's appropriate format.
+        1) Board Id - As Integer
+        2) Item Name
+        3) Column Values: Dictionary.
+            Instructions:
+            Pass column_id: column_value type of key value pairs.
+            Ensure you check date, person and picklist fields's appropriate format.
+    Output:
 
     """
     # Format values into a JSON string and escape it for GraphQL
