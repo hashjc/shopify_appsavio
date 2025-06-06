@@ -23,9 +23,10 @@ def order_created_in_shopify():
     """
     Order Creation webhook handler
     """
-    print("Order Creation method")
+    print("Order Creation method ", flush=True)
     data = request.get_json()
-    print("Order Creation method 2 = ", data)
+    print("Order Creation method 2 = ", data, flush=True)
+    return None
 
 @app.route('/order_create_draft', methods=['POST'])
 def draft_order_created_in_shopify():
